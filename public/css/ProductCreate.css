@@ -1,0 +1,119 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #cccccc;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    background-color: #fd8103;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    animation: fadeInDown 1s ease;
+}
+
+form {
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #410bdb ;
+    padding: 20px;
+    padding-right: 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    animation: fadeInUp 1s ease;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #fd8103;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #7ffeff;
+    color: #410bdb;
+    transform: scale(1.05);
+}
+
+a {
+    color: #fd8103;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #7ffeff;
+}
+
+.error {
+    color: #fff;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+}
+
+.error ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.error li {
+    margin-bottom: 5px;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

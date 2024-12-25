@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script src="{{ asset('js/app.js') }}" defer></script> <!-- Menambahkan file JS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -8,6 +10,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles') <!-- For adding additional styles -->
 </head>
+
 <body class="custom-bg">
 
     <!-- Header -->
@@ -31,13 +34,9 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 MyApp. All Rights Reserved.</p>
-    </footer>
-
     <!-- JS Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts') <!-- For adding additional scripts -->
 </body>
+
 </html>

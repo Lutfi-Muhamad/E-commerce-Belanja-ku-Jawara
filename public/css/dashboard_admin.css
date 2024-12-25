@@ -1,0 +1,204 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Pastikan body menggunakan Flexbox */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pastikan halaman memiliki tinggi minimal penuh */
+    background-color: rgb(212, 212, 212);
+    color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fd8103  ;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+h1::after {
+    content: "";
+    width: 50%;
+    height: 4px;
+    background: #000000;
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #7ffeff;
+}
+
+a:hover {
+    color: #fd8103;
+    text-shadow: 0 0 10px #fd8103;
+}
+
+/* Pesan sukses */
+.success-message {
+    background-color: #7ffeff;
+    color: #410bdb;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border-spacing: 0;
+}
+
+table th,
+table td {
+    padding: 20px;
+    text-align: center;
+    font-size: px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: linear-gradient(to right, #fd8103, #ffab4c);
+    color: white;
+    font-size: 1.1rem;
+}
+
+table td {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+table tr:hover {
+    background: #e0e7ff;
+    transition: background-color 0.3s ease;
+}
+
+table img {
+    border-radius: 10px;
+    border: 2px solid #fd8103;
+    max-width: 120px;
+    max-height: 120px;
+    object-fit: cover;
+    margin: 5px;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+table img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Add Product */
+.add-product-btn {
+    display: inline-block;
+    background: linear-gradient(to right, #fd8103, #ffab4c);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.3rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.add-product-btn:hover {
+    background-color: #7ffeff;
+    color: #410bdb;
+    transform: scale(1.1);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.action-buttons a,
+.action-buttons button {
+    background: #7ffeff;
+    color: #410bdb;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.action-buttons a:hover,
+.action-buttons button:hover {
+    background: #fd8103;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    table th,
+    table td {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .add-product-btn {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+
+    .action-buttons a,
+    .action-buttons button {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+}
+
+/* Mengatur supaya konten utama mengambil sisa ruang yang ada */
+main {
+    flex-grow: 1; /* Konten utama akan mengisi ruang yang tersisa */
+}
+
+/* Tombol Logout */
+.logout-btn {
+    margin-top: auto; /* Memastikan tombol berada di paling bawah */
+    padding: 10px 20px;
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.logout-btn:hover {
+    background-color: #facc15;
+}

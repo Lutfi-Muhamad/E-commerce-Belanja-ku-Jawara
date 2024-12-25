@@ -34,6 +34,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        // No default values needed for 'level'
+    ];
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

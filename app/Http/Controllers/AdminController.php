@@ -16,7 +16,7 @@ class AdminController extends Controller
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        return view('admin.dashboard');
+        return view('TampilanDashboard.index');
     }
 
     // Menampilkan halaman login admin
@@ -26,9 +26,9 @@ class AdminController extends Controller
     }
 
     public function dashboard()
-{
-    return view('lutfi.dashboard'); // Pastikan folder view sesuai, misal resources/views/lutfi/dashboard.blade.php
-}
+    {
+        return view('TampilanDashboard.index'); // Pastikan folder view sesuai, misal resources/views/lutfi/dashboard.blade.php
+    }
 
     // Proses login admin
 
@@ -43,7 +43,7 @@ class AdminController extends Controller
 
         // Proses autentikasi
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('lutfi.dashboard'); // Arahkan ke dashboard setelah login berhasil
+            return redirect()->route('TampilanDashboard.index'); // Arahkan ke dashboard setelah login berhasil
         }
 
         return back()->withErrors([
@@ -74,62 +74,62 @@ class AdminController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('lutfi.dashboard'); // Arahkan ke dashboard setelah registrasi berhasil
+        return redirect()->route('TampilanDashboard.index'); // Arahkan ke dashboard setelah registrasi berhasil
     }
 
-    
-     // Menampilkan form lupa password
-     public function showForgotPasswordForm()
-     {
-         return view('auth.forgot-password');
-     }
- 
-     // Mengirim token reset password
-     public function sendResetEmail(Request $request)
-     {
-         $request->validate([
-             'email' => 'required|email|exists:users,email',
-         ]);
- 
-         $email = $request->email;
- 
-         // Generate token dan simpan ke tabel password_resets
-         $token = Str::random(60);
-         DB::table('password_resets')->updateOrInsert(
-             ['email' => $email],
-             ['token' => Hash::make($token), 'created_at' => now()]
-         );
- 
-         return back()->with('status', "Token untuk reset password: $token");
-     }
- 
-     // Proses reset password
-     public function resetPassword(Request $request)
-     {
-         $request->validate([
-             'email' => 'required|email|exists:users,email',
-             'password' => 'required|string|confirmed|min:8',
-         ]);
- 
-         // Cari token di tabel password_resets
-         $reset = DB::table('password_resets')->where('email', $request->email)->first();
- 
-         if (!$reset) {
-             return back()->withErrors(['email' => 'Token reset tidak ditemukan.']);
-         }
- 
-         // Update password user
-         $user = User::where('email', $request->email)->first();
-         $user->update(['password' => Hash::make($request->password)]);
- 
-         // Hapus token reset password setelah berhasil
-         DB::table('password_resets')->where('email', $request->email)->delete();
- 
-         return back()->with('status', 'Password berhasil diubah.');
-     }
- 
-   
-    
+
+    // Menampilkan form lupa password
+    public function showForgotPasswordForm()
+    {
+        return view('auth.forgot-password');
+    }
+
+    // Mengirim token reset password
+    public function sendResetEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $email = $request->email;
+
+        // Generate token dan simpan ke tabel password_resets
+        $token = Str::random(12);
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $email],
+            ['token' => Hash::make($token), 'created_at' => now()]
+        );
+
+        return back()->with('status', "Token untuk reset password: $token");
+    }
+
+    // Proses reset password
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
+
+        // Cari token di tabel password_resets
+        $reset = DB::table('password_resets')->where('email', $request->email)->first();
+
+        if (!$reset) {
+            return back()->withErrors(['email' => 'Token reset tidak ditemukan.']);
+        }
+
+        // Update password user
+        $user = User::where('email', $request->email)->first();
+        $user->update(['password' => Hash::make($request->password)]);
+
+        // Hapus token reset password setelah berhasil
+        DB::table('password_resets')->where('email', $request->email)->delete();
+
+        return back()->with('status', 'Password berhasil diubah.');
+    }
+
+
+
     // Logout admin
     public function logout()
     {
