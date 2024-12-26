@@ -1,39 +1,38 @@
-yang Ini <?php
+<?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\ProductController;
 
-            use App\Http\Controllers\API\AdminController;
-            use App\Http\Controllers\API\ProductController;
-            use App\Http\Controllers\API\CartController;
-            use Illuminate\Support\Facades\Route;
+// Rute untuk Admin
+Route::prefix('admin')->group(function () {
+    Route::post('/login', [AdminController::class, 'login']);
+    Route::post('/register', [AdminController::class, 'register']);
+    Route::post('/send-reset-email', [AdminController::class, 'sendResetEmail']);
+    Route::post('/reset-password', [AdminController::class, 'resetPassword']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'index']);
+        Route::post('/logout', [AdminController::class, 'logout']);
+    });
+});
 
-            // Admin Routes (Auth)
-            Route::post('login', [AdminController::class, 'login']);
-            Route::post('register', [AdminController::class, 'register']);
+// Rute untuk Cart
+Route::prefix('cart')->middleware('auth:sanctum')->group(function () {
+    Route::post('/add/{id}', [CartController::class, 'addToCart']);
+    Route::get('/show', [CartController::class, 'showCart']);
+    Route::post('/update/{id}', [CartController::class, 'updateQuantity']);
+    Route::delete('/remove/{id}', [CartController::class, 'removeFromCart']);
+    Route::post('/checkout', [CartController::class, 'checkout']);
+    Route::delete('/clear', [CartController::class, 'clearCart']);
+});
 
-
-            // Admin routes to manage products ini
-
-
-
-            Route::group(['middleware' => ['auth:admin']], function () {
-                Route::get('products', [ProductController::class, 'index']);  // View products for admin
-                Route::post('products', [ProductController::class, 'store']);  // Add a new product
-                Route::put('products/{id}', [ProductController::class, 'update']);  // Update a product
-                Route::delete('products/{id}', [ProductController::class, 'destroy']);  // Delete a product
-            });
-
-            // User routes to view products
-            Route::get('products/user', [ProductController::class, 'indexUser']);  // View products for users
-
-            // Cart routes
-            Route::middleware('auth:sanctum')->group(function () {
-                Route::post('cart/{id}', [CartController::class, 'addToCart']);  // Add product to cart
-                Route::get('cart', [CartController::class, 'showCart']);  // Show cart
-                Route::put('cart/{id}', [CartController::class, 'updateQuantity']);  // Update product quantity in cart
-                Route::delete('cart/{id}', [CartController::class, 'removeFromCart']);  // Remove product from cart
-                Route::post('cart/checkout', [CartController::class, 'checkout']);  // Checkout
-                Route::delete('cart', [CartController::class, 'clearCart']);  // Clear all products in cart
-            });
-
-            // Logout Route
-            Route::middleware('auth:sanctum')->post('logout', [AdminController::class, 'logout']);
+// Rute untuk Produk
+Route::prefix('products')->group(function () {
+    Route::get('/admin', [ProductController::class, 'index']); // Semua produk untuk admin
+    Route::get('/user', [ProductController::class, 'indexuser']); // Semua produk untuk user
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/store', [ProductController::class, 'store']); // Menambahkan produk baru
+        Route::put('/update/{id}', [ProductController::class, 'update']); // Mengubah produk
+    });
+});
